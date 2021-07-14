@@ -14,6 +14,7 @@ const initialState: RootState.SearchState = {
   ],
   endpoint: "films/",
   query: "",
+  page: 1,
   response: {
     count: 0,
     next: null,
@@ -24,22 +25,35 @@ const initialState: RootState.SearchState = {
 
 export const searchReducer = handleActions<RootState.SearchState, SearchModel>(
   {
+    [SearchActions.Type.SET_ENDPOINT]: (state, action) => {
+      return {
+        ...state,
+        endpoint: action.payload.endpoint,
+        page: 1
+      }
+    },
     [SearchActions.Type.SET_QUERY]: (state, action) => {
       return {
         ...state,
-        query: action.payload.query
+        query: action.payload.query,
+        response: {
+          count: 0,
+          next: null,
+          previous: null,
+          results: []
+        }
+      }
+    },
+    [SearchActions.Type.SET_PAGE]: (state, action) => {
+      return {
+        ...state,
+        page: action.payload.page
       }
     },
     [SearchActions.Type.SET_RESPONSE]: (state, action) => {
       return {
         ...state,
         response: action.payload.response
-      }
-    },
-    [SearchActions.Type.SET_ENDPOINT]: (state, action) => {
-      return {
-        ...state,
-        endpoint: action.payload.endpoint
       }
     }
   },

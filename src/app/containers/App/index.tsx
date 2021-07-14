@@ -29,14 +29,15 @@ export const App = ({ history, location }: App.Props) => {
   React.useEffect(() => {
     if (search.query) {
       (async () => {
-        const response = await SearchService.get(search.endpoint, search.query) || [];
-        searchActions.setResults(response);
+        const response = await SearchService.get(search.endpoint, search.query, search.page) || [];
+        searchActions.setResponse({ response });
       })();
     }
-  }, [search.query]);
+  }, [search.query, search.page]);
 
   const setEndpoint = React.useCallback((e: React.SyntheticEvent<HTMLButtonElement>) => searchActions.setEndpoint({ endpoint: e.currentTarget.value }), []);
   const setQuery = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => searchActions.setQuery({ query: e.target.value }), []);
+  const setPage = React.useCallback((e: React.ChangeEvent<HTMLInputElement>, page: number) => searchActions.setPage({ page: page + 1 }), []);
 
   return (
     <Grid container spacing={0}>
@@ -55,7 +56,11 @@ export const App = ({ history, location }: App.Props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <DataTable results={search.results} />
+            <DataTable
+              data={search.response}
+              page={search.page}
+              onPageChange={setPage}
+            />
           </Grid>
         </Grid>
       </Grid>

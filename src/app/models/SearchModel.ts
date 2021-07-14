@@ -118,5 +118,6 @@ export interface SearchModel {
   selectors: Array<Selector>,
   endpoint: string,
   query: string,
+  page: number,
   response: APIResponse
 }

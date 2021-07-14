@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@material-ui/core';
-import { ValidResults } from 'app/models';
+import { APIResponse } from 'app/models';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -11,26 +11,25 @@ const useStyles = makeStyles((theme) => ({
 
 export namespace DataTable {
   export interface Props {
-    results: ValidResults
+    data: APIResponse,
+    page: number,
+    onPageChange: (e: any, page: number) => void
   }
 }
 
 export const DataTable = ({
-  results
+  data,
+  page,
+  onPageChange
 }: DataTable.Props): JSX.Element | null => {
   const classes = useStyles();
 
-  if (results.length <= 0) {
+  if (data.results?.length <= 0) {
     return null;
   }
   {/* //TODO: Create Parser by type */ }
-
-  const headers = Object.keys(results[0]);
-  const contents = Object.values(results);
-
-  //TODO: Pagination: https://swapi.dev/api/people/?search=a&page=2 - You have next & previous on response
-  const rowsPerPage = 2;
-  const page = 0;
+  const headers = Object.keys(data.results[0]);
+  const contents = Object.values(data.results);
 
   return (
     <>
@@ -44,27 +43,24 @@ export const DataTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? contents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : contents
-            ).map((content: any, index: number) => (
-              <TableRow key={index}>
-                {Object.values(content).slice(0, 5).map((value: any) => (
-                  <TableCell component="th" scope="row">{value}</TableCell>
-                ))}
-              </TableRow>
-            ))}
+            {contents
+              .map((content: any, index: number) => (
+                <TableRow key={index}>
+                  {Object.values(content).slice(0, 5).map((value: any) => (
+                    <TableCell component="th" scope="row">{value}</TableCell>
+                  ))}
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
-      {/* //TODO: Implement pagination */}
       <TablePagination
         rowsPerPageOptions={[]}
         component="div"
-        count={100}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={() => { }}
+        count={data.count}
+        rowsPerPage={10}
+        page={page - 1}
+        onPageChange={onPageChange}
       />
     </>
   );
