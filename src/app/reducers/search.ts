@@ -29,13 +29,20 @@ export const searchReducer = handleActions<RootState.SearchState, SearchModel>(
       return {
         ...state,
         endpoint: action.payload.endpoint,
-        page: 1
+        page: 1,
+        response: {
+          count: 0,
+          next: null,
+          previous: null,
+          results: []
+        }
       }
     },
     [SearchActions.Type.SET_QUERY]: (state, action) => {
       return {
         ...state,
         query: action.payload.query,
+        page: 1,
         response: {
           count: 0,
           next: null,

@@ -37,20 +37,19 @@ export const DataTable = ({
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {headers.slice(0, 5).map(header => (
-                <TableCell>{header}</TableCell>
+              {headers.slice(0, 5).map((header, index) => (
+                <TableCell key={index}>{header}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {contents
-              .map((content: any, index: number) => (
-                <TableRow key={index}>
-                  {Object.values(content).slice(0, 5).map((value: any) => (
-                    <TableCell component="th" scope="row">{value}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
+            {contents.map((content: any, index: number) => (
+              <TableRow key={index}>
+                {Object.values(content).slice(0, 5).map((value: any, i: number) => (
+                  <TableCell key={i} component="th" scope="row">{value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

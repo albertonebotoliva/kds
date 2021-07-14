@@ -33,7 +33,7 @@ export const Search = ({
   endpoint, onChange
 }: Search.Props): JSX.Element => {
   const classes = useStyles();
-  const handleChange = useDebounceEvent(onChange, 1000);
+  const handleChange = useDebounceEvent(onChange);
   const preventDefault = (e: React.FormEvent<HTMLDivElement>) => e.preventDefault();
   return (
     <Paper component="form" onSubmit={preventDefault} className={classes.root}>
