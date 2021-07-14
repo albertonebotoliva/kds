@@ -12,6 +12,7 @@ const initialState: RootState.SearchState = {
     { id: 5, label: "starships", uri: "starships/" },
     { id: 6, label: "vehicles", uri: "vehicles/" }
   ],
+  isFetching: false,
   endpoint: "films/",
   query: "",
   page: 1,
@@ -20,11 +21,21 @@ const initialState: RootState.SearchState = {
     next: null,
     previous: null,
     results: []
+  },
+  dialog: {
+    open: false,
+    result: null
   }
 };
 
 export const searchReducer = handleActions<RootState.SearchState, SearchModel>(
   {
+    [SearchActions.Type.TOGGLE_IS_FETCHING]: (state, action) => {
+      return {
+        ...state,
+        isFetching: action.payload.isFetching
+      }
+    },
     [SearchActions.Type.SET_ENDPOINT]: (state, action) => {
       return {
         ...state,
@@ -61,6 +72,12 @@ export const searchReducer = handleActions<RootState.SearchState, SearchModel>(
       return {
         ...state,
         response: action.payload.response
+      }
+    },
+    [SearchActions.Type.SET_DIALOG]: (state, action) => {
+      return {
+        ...state,
+        dialog: action.payload.dialog
       }
     }
   },

@@ -114,10 +114,17 @@ export type APIResponse = {
   results: ValidResults
 }
 
+export type Dialog = {
+  open: boolean,
+  result: IFilm | IPeople | IPlanet | ISpecie | IStarship | IVehicle | any
+}
+
 export interface SearchModel {
   selectors: Array<Selector>,
+  isFetching: boolean,
   endpoint: string,
   query: string,
   page: number,
-  response: APIResponse
+  response: APIResponse,
+  dialog: Dialog
 }

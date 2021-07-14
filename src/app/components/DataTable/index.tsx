@@ -1,25 +1,32 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@material-ui/core';
-import { APIResponse } from 'app/models';
+import { APIResponse, Dialog as TDialog } from 'app/models';
 
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650
+  },
+  pointer: {
+    cursor: "pointer"
   }
 }));
 
 export namespace DataTable {
   export interface Props {
     data: APIResponse,
+    loading: boolean,
     page: number,
+    setDialog: (dialog: TDialog) => any,
     onPageChange: (e: any, page: number) => void
   }
 }
 
 export const DataTable = ({
   data,
+  loading,
   page,
+  setDialog,
   onPageChange
 }: DataTable.Props): JSX.Element | null => {
   const classes = useStyles();
@@ -27,9 +34,10 @@ export const DataTable = ({
   if (data.results?.length <= 0) {
     return null;
   }
-  {/* //TODO: Create Parser by type */ }
+
   const headers = Object.keys(data.results[0]);
   const contents = Object.values(data.results);
+  const disablePagination = (e: any, page: number) => e.preventDefault();
 
   return (
     <>
@@ -44,7 +52,13 @@ export const DataTable = ({
           </TableHead>
           <TableBody>
             {contents.map((content: any, index: number) => (
-              <TableRow key={index}>
+              <TableRow
+                hover
+                key={index}
+                id={"index"}
+                className={classes.pointer}
+                onClick={() => setDialog({ open: true, result: content })}
+              >
                 {Object.values(content).slice(0, 5).map((value: any, i: number) => (
                   <TableCell key={i} component="th" scope="row">{value}</TableCell>
                 ))}
@@ -59,7 +73,7 @@ export const DataTable = ({
         count={data.count}
         rowsPerPage={10}
         page={page - 1}
-        onPageChange={onPageChange}
+        onPageChange={loading ? disablePagination : onPageChange}
       />
     </>
   );

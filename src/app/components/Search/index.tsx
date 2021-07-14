@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { InputBase, Paper, Chip } from '@material-ui/core';
+import { InputBase, Paper, Chip, CircularProgress } from '@material-ui/core';
 import { useDebounceEvent } from 'app/hooks/useDebounce';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,12 +25,15 @@ const useStyles = makeStyles((theme) => ({
 export namespace Search {
   export interface Props {
     endpoint: string,
+    loading: boolean,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 }
 
 export const Search = ({
-  endpoint, onChange
+  endpoint,
+  loading,
+  onChange
 }: Search.Props): JSX.Element => {
   const classes = useStyles();
   const handleChange = useDebounceEvent(onChange);
@@ -41,11 +44,13 @@ export const Search = ({
         {<Chip color={"primary"} label={endpoint} className={classes.chip} />}
       </div>
       <InputBase
+        disabled={loading}
         className={classes.input}
         placeholder="Search..."
         inputProps={{ 'aria-label': 'mainSearch' }}
         onChange={handleChange}
       />
+      {loading && (<CircularProgress size={20} />)}
     </Paper>
   );
 };
