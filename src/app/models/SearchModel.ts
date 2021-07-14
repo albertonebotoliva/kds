@@ -118,5 +118,5 @@ export interface SearchModel {
   selectors: Array<Selector>,
   endpoint: string,
   query: string,
-  results: ValidResults
+  response: APIResponse
 }

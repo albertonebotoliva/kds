@@ -6,12 +6,12 @@ import { SearchModel } from 'app/models';
 export namespace SearchActions {
   export enum Type {
     SET_ENDPOINT = 'SET_ENDPOINT',
-    SET_RESULTS = 'SET_RESULTS',
+    SET_RESPONSE = 'SET_RESPONSE',
     SET_QUERY = 'SET_QUERY',
   }
 
   export const setEndpoint = createAction<PartialPick<SearchModel, 'endpoint'>>(Type.SET_ENDPOINT);
-  export const setResults = createAction<PartialPick<SearchModel, 'results'>>(Type.SET_RESULTS);
+  export const setResponse = createAction<PartialPick<SearchModel, 'response'>>(Type.SET_RESPONSE);
   export const setQuery = createAction<PartialPick<SearchModel, 'query'>>(Type.SET_QUERY);
 }
 
