@@ -1,59 +1,32 @@
-# Frontend Boilerplate with React, Redux & TypeScript
+# Technical Test for KDS
 
-A bare minimum react-hooks-redux-webpack-typescript boilerplate with TodoMVC example.
+DEMO - http://testkds.s3-website.eu-west-3.amazonaws.com/
 
-Note that this project does not include **Server-Side Rendering**, **Static code analysis**, **Testing Frameworks**
-If needed, please fork this repository and add your own that meets your requirements.
+In this test, you will develop a SPA with React to browse an API endpoint. 
+(choose one of the public APIs from here: https://github.com/public-apis/public-apis)
 
-Ideal for creating React apps from the scratch.
+Showcase a data table (including pagination) with a brief description (max five columns),
+where the user can click on one of the elements and show the full description of the item.
 
-## Contains
+### Requirements:
 
-- [x] [Typescript](https://www.typescriptlang.org/) 3.8
-- [x] [React](https://facebook.github.io/react/) 16.12
-- [x] [Redux](https://github.com/reactjs/redux) 4
-- [x] [Redux Thunk](https://github.com/reduxjs/redux-thunk) 2.3
-- [x] [React Router](https://github.com/ReactTraining/react-router) 5.1
-- [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [x] [TodoMVC example](http://todomvc.com)
+- Use React, ideally with redux too
+- Choose your own UI components library (internally we use our home made library, but you are free to choose whichever you want)
+- Versioning the code with git
+- Bonus: showcase the API by deploying it(hint: github pages, zeit.co, heroku, …)
 
-### Build tools
 
-- [x] [Webpack](https://webpack.github.io) 4
-  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
-  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-- [x] [Typescript Loader](https://github.com/TypeStrong/ts-loader)
-- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
-  - [x] [PostCSS Preset Env](https://preset-env.cssdb.org/)
-  - [x] [CSS modules](https://github.com/css-modules/css-modules)
-- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-- [x] [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
+### Considerations
 
-## Installation
+- Used React + Redux + TypeScript - Based on https://github.com/rokoroku/react-redux-typescript-boilerplate
 
-```
-$ npm ci
-```
+- Used Material-UI as a graphic framework - https://material-ui.com/
 
-## Running
+- Deployed in AWS S3 container - http://testkds.s3-website.eu-west-3.amazonaws.com/
 
-```
-$ npm start
-```
+- Test environment - Jest & Testing-library
+  - https://jestjs.io/
+  - https://testing-library.com/docs/react-testing-library/intro/
 
-## Build
+- SWAPI implementation - https://swapi.dev/
 
-```
-$ npm run build
-```
-
-## Deploy (to the [GitHub Pages](https://pages.github.com/))
-
-```
-$ npm run deploy
-```
-
-# License
-
-MIT
