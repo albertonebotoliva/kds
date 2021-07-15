@@ -4,7 +4,7 @@ export type Selector = {
   uri: string
 }
 
-type CommonAttributes = {
+export type CommonAttributes = {
   created: Date,
   edited: Date,
   url: string

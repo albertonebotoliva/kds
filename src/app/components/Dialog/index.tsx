@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Dialog as DialogBox, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { List, ListItem, ListItemText, Button, Dialog as DialogBox, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { Dialog as TDialog } from 'app/models';
+import { omit } from 'app/utils';
 
 interface IProps {
     dialog: TDialog,
@@ -11,25 +12,26 @@ export const Dialog = ({ dialog, setDialog }: IProps): JSX.Element => {
     if (!dialog.result) return <div />
 
     const handleClose = () => setDialog({ open: false, result: null });
-    const keys = Object.keys(dialog.result);
-    const values = Object.values(dialog.result);
+    const escapedResult = omit(dialog.result, "people", "pilots", "residents", "films", "homeworld", "species", "characters", "vehicles", "starships", "url", "planets", "created", "edited");
+    const keys = Object.keys(escapedResult);
+    const values = Object.values(escapedResult);
 
     return (
-        <DialogBox open={dialog.open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogBox open={dialog.open} fullWidth maxWidth={"sm"} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">{dialog?.result?.title || dialog?.result?.name}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    <ul>
+                    <List>
                         {
-                            Object
-                                .values(dialog.result)
-                                .map(
-                                    (value: any, i: number) => (
-                                        <li>{keys[i]}: {value}</li>
-                                    )
+                            values.map(
+                                (value: any, i: number) => (
+                                    <ListItem>
+                                        <ListItemText primary={<b>{keys[i]}</b>} secondary={value} />
+                                    </ListItem>
                                 )
+                            )
                         }
-                    </ul>
+                    </List>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
