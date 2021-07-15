@@ -10,7 +10,7 @@ import { Selector, Search, DataTable, Dialog } from 'app/components';
 import { SearchService } from 'app/services';
 import { Dialog as TDialog } from 'app/models';
 
-const App = () => {
+export const App = () => {
   const dispatch = useDispatch();
   const { search } = useSelector((state: RootState) => {
     return {
@@ -75,5 +75,3 @@ const App = () => {
     </Grid>
   );
 };
-
-export default App;
