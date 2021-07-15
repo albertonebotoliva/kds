@@ -1,10 +1,10 @@
-import { TodoModel } from 'app/models';
+import { SearchModel } from 'app/models';
 
 export interface RootState {
-  todos: RootState.TodoState;
+  search: RootState.SearchState;
   router?: any;
 }
 
 export namespace RootState {
-  export type TodoState = TodoModel[];
+  export type SearchState = SearchModel;
 }
