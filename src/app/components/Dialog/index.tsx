@@ -1,7 +1,7 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Button, Dialog as DialogBox, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import { Dialog as TDialog } from 'app/models';
-import { omit } from 'app/utils';
+import { List, ListItem, ListItemText, Button, Dialog as DialogBox, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Dialog as TDialog } from '../../models';
+import { omit } from '../../utils';
 
 interface IProps {
     dialog: TDialog,
@@ -20,19 +20,17 @@ export const Dialog = ({ dialog, setDialog }: IProps): JSX.Element => {
         <DialogBox open={dialog.open} fullWidth maxWidth={"sm"} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">{dialog?.result?.title || dialog?.result?.name}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    <List>
-                        {
-                            values.map(
-                                (value: any, i: number) => (
-                                    <ListItem>
-                                        <ListItemText primary={<b>{keys[i]}</b>} secondary={value} />
-                                    </ListItem>
-                                )
+                <List>
+                    {
+                        values.map(
+                            (value: any, i: number) => (
+                                <ListItem key={i}>
+                                    <ListItemText primary={<b>{keys[i]}</b>} secondary={value} />
+                                </ListItem>
                             )
-                        }
-                    </List>
-                </DialogContentText>
+                        )
+                    }
+                </List>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} variant="text" color="primary">

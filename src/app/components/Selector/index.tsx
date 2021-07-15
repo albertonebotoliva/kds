@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { Selector as TSelector } from 'app/models';
+import { Selector as TSelector } from '../../models';
 
 export namespace Selector {
   export interface Props {

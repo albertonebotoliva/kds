@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@material-ui/core';
-import { APIResponse, Dialog as TDialog } from 'app/models';
+import { APIResponse, Dialog as TDialog } from '../../models';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -55,6 +55,7 @@ export const DataTable = ({
               <TableRow
                 hover
                 key={index}
+                role={!index ? "tablerow" : ""}
                 id={"index"}
                 className={classes.pointer}
                 onClick={() => setDialog({ open: true, result: content })}

@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { RootState } from './state';
-import { SearchActions } from 'app/actions/search';
-import { SearchModel } from 'app/models';
+import { SearchActions } from '../actions/search';
+import { SearchModel } from '../models';
 
 const initialState: RootState.SearchState = {
   selectors: [

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { RouteComponentProps } from 'react-router';
 import {
   useDispatch,
   useSelector
@@ -11,11 +10,7 @@ import { Selector, Search, DataTable, Dialog } from 'app/components';
 import { SearchService } from 'app/services';
 import { Dialog as TDialog } from 'app/models';
 
-export namespace App {
-  export interface Props extends RouteComponentProps<void> { }
-}
-
-export const App = ({ history, location }: App.Props) => {
+const App = () => {
   const dispatch = useDispatch();
   const { search } = useSelector((state: RootState) => {
     return {
@@ -80,3 +75,5 @@ export const App = ({ history, location }: App.Props) => {
     </Grid>
   );
 };
+
+export default App;

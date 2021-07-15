@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputBase, Paper, Chip, CircularProgress } from '@material-ui/core';
-import { useDebounceEvent } from 'app/hooks/useDebounce';
+import { useDebounceEvent } from '../../hooks/useDebounce';
 
 const useStyles = makeStyles((theme) => ({
   root: {
